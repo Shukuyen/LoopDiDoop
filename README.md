@@ -1,6 +1,17 @@
-# LoopDiDoop 🎙️🔁
+<div align="center">
+  <img src="app_icon.png" alt="LoopDiDoop Logo" width="128" height="128" />
+  <h1>LoopDiDoop</h1>
+  <p><strong>A tiny, friction-free Windows 11 utility for short-term memory audio loops.</strong></p>
+  <p>
+    <img src="https://img.shields.io/badge/Platform-Windows%2011-0078D4?style=flat-square&logo=windows" alt="Platform: Windows 11" />
+    <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet" alt=".NET 8" />
+    <img src="https://img.shields.io/badge/Binary-&lt;%201%20MB-10B981?style=flat-square" alt="Binary Size" />
+  </p>
+</div>
 
-A tiny, friction-free Windows 11 background utility that records your microphone when you hold a hotkey and loops the audio back to you until you tap the hotkey once more to dismiss it.
+---
+
+**LoopDiDoop** records your microphone when you hold a hotkey and loops the audio back to you until you tap the hotkey once more to dismiss it.
 
 Built to offload thoughts and numbers into short-term memory (e.g. 2FA codes, tracking IDs, quick phone numbers, scratch calculations) and get rid of them the moment they're no longer needed.
 
@@ -10,7 +21,7 @@ Built to offload thoughts and numbers into short-term memory (e.g. 2FA codes, tr
 
 1. **Hold to Record**: Hold your hotkey (default `Ctrl + Alt + Space` or your custom key).
    - A soft blip plays to confirm recording has started.
-   - A pill slides down from the top of your screen showing a red recording beacon, live volume meter, and elapsed timer.
+   - A Dynamic Island pill smoothly slides down from the top of your screen showing a red recording beacon, live volume meter, and elapsed timer.
 2. **Release to Loop**: Let go of the hotkey when you finish speaking.
    - Accidental micro-taps (< 300ms) are silently discarded.
    - Leading and trailing silence is automatically trimmed.
@@ -19,8 +30,19 @@ Built to offload thoughts and numbers into short-term memory (e.g. 2FA codes, tr
    - The pill displays a loop badge: *"Looping • Tap hotkey to clear"*.
 3. **Tap to Clear**: Tap the hotkey once when you're done with the information.
    - Playback stops immediately.
-   - Another blip plays and the pill slides away.
-   - Audio buffer is wiped clean from memory.
+   - A dismiss blip plays and the pill slides away.
+   - The audio buffer is wiped clean from memory.
+
+---
+
+## 🚀 Running the App
+
+### Standalone Executable
+Download the single-file executable from [Releases](https://github.com/Shukuyen/LoopDiDoop/releases) (or build locally). It is self-contained, under 1 MB, and requires no installation.
+
+```powershell
+.\bin\Release\net8.0-windows\win-x64\publish\LoopDiDoop.exe
+```
 
 ---
 
@@ -51,3 +73,4 @@ dotnet test tests/LoopDiDoop.Tests/LoopDiDoop.Tests.csproj
 - **Framework**: C# / .NET 8 (WPF + Windows Forms for NotifyIcon)
 - **Audio Engine**: NAudio (WASAPI in-memory capture, low-latency audio looper)
 - **Global Input**: Win32 `SetWindowsHookEx(WH_KEYBOARD_LL)` with key-repeat suppression
+- **Overlay**: Non-activating topmost Dynamic Island pill (`WS_EX_NOACTIVATE`)
